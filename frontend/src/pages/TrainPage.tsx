@@ -21,6 +21,7 @@ import { trainModels, listTrainingRuns, getTrainingRun, saveModel } from "../api
 import { extractErrorMessage } from "../api/client";
 import { useSelectedDataset } from "../hooks/useSelectedDataset";
 import TrainingResultsTable from "../components/TrainingResultsTable";
+import ModelExplainability from "../components/ModelExplainability";
 
 export default function TrainPage() {
   const { projectId } = useParams();
@@ -202,12 +203,15 @@ export default function TrainPage() {
           )}
 
           {activeRun && (
-            <TrainingResultsTable
-              run={activeRun}
-              title={runs && runs.length > 1 ? `Run #${activeRun.id} results` : "Results"}
-              onSave={(modelName) => saveMutation.mutate({ runId: activeRun.id, modelName })}
-              savingModelName={saveMutation.isPending ? saveMutation.variables?.modelName : undefined}
-            />
+            <>
+              <TrainingResultsTable
+                run={activeRun}
+                title={runs && runs.length > 1 ? `Run #${activeRun.id} results` : "Results"}
+                onSave={(modelName) => saveMutation.mutate({ runId: activeRun.id, modelName })}
+                savingModelName={saveMutation.isPending ? saveMutation.variables?.modelName : undefined}
+              />
+              <ModelExplainability projectId={id} datasetId={datasetId} run={activeRun} />
+            </>
           )}
         </Stack>
       )}
