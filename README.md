@@ -64,26 +64,3 @@ npm install
 npm run dev
 ```
 
-Frontend runs at http://localhost:5173.
-
-## Roadmap
-
-1. Project setup
-2. User authentication (JWT)
-3. Project management
-4. Dataset upload
-5. Automatic data profiling (EDA)
-6. Target column selection
-7. ML problem detection (classification/regression)
-8. Data cleaning pipeline
-9. Feature engineering
-10. Model training (Logistic Regression, Random Forest, XGBoost, LightGBM, CatBoost)
-11. MLflow experiment tracking
-12. Model comparison dashboard
-13. SHAP explainability
-14. Save best model
-15. Prediction API
-16. Batch prediction
-17. Prediction history
-18. Frontend dashboard
-19. Deployment
