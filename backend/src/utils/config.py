@@ -17,9 +17,16 @@ class Settings(BaseSettings):
     max_upload_size_mb: int = 100
     mlflow_tracking_uri: str = "sqlite:///mlflow.db"
 
-    cors_origins: list[str] = ["http://localhost:5173"]
+    # Plain comma-separated string rather than a list — pydantic-settings tries to
+    # JSON-parse env vars for list-typed fields, which is error-prone to type
+    # correctly into a plain-text dashboard field on most hosting platforms.
+    cors_origins: str = "http://localhost:5173"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+
+    @property
+    def cors_origins_list(self) -> list[str]:
+        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
 
 
 settings = Settings()
